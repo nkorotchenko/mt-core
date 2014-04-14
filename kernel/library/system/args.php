@@ -24,17 +24,22 @@ class Args {
 		if ($paramPos)
 			$requestUrl = substr($requestUrl, 0, $paramPos);
 		
-		self::$requestArgs = explode("/", $requestUrl);
+		$args = explode("/", $requestUrl);
 		self::$requestParms = array();
 		
-		// Clean up arguments
-		foreach(self::$requestArgs as $key => $val)
+		foreach($args as $key => $val)
 		{
-			if (empty($val))
-				unset(self::$requestArgs[$key]);
-		}
+			if (!empty($val))
+				unset($args[$key]);
+		}		
 		
-		self::$requestArgs = Validate("routeApi", self::$requestArgs);
+		// Clean up arguments		
+		$args = Validate("routeApi", $args);
+		foreach($args as $key => $val)
+		{
+			if (!empty($val))
+				self::$requestArgs[] = $val;
+		}
 		
 		// Clean up params
 		foreach($_GET as $key => $val)

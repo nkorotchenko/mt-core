@@ -38,7 +38,7 @@ class DefaultTheme extends Theme {
 		$this->Content();
 		
 		if ($name)
-			include($this->appPath."/pages/$name.page.php");
+			include($this->app->path."/pages/$name.page.php");
 		
 		$this->EndContent();
 		

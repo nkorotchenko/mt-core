@@ -88,6 +88,11 @@ class Sql {
 		return mysql_fetch_array( $result );
 	}
 	
+	public function Free($result)
+	{
+		mysql_free_result( $result );
+	}
+	
 	public function Query($query_text)
 	{
 		if ( $this->connection )
@@ -111,11 +116,6 @@ class Sql {
 		{
 			return mysql_query( $query_text );
 		}
-	}
-	
-	public function Free($result)
-	{
-		mysql_free_result( $result );
 	}
 }
 ?>

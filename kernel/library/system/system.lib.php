@@ -32,7 +32,7 @@ class System {
 		if (!self::$sqlConnection)
 		{
 			self::$sql = new SQL();
-			self::$sqlConnection = self::$sql->Open($this->settings->Get("data_base"));
+			self::$sqlConnection = self::$sql->Open(self::$settings->Get("data_base"));
 			
 			if (!self::$sqlConnection)
 				return false;
@@ -70,6 +70,7 @@ class System {
 				
 			$app = new $className();
 			$app->path = PATH_APP.strtolower("/$name");
+			$app->url = str_replace(PATH_SITE, "", PATH_APP.strtolower("/$name"));
 			$app->main($args, $params);
 		}
 		else
