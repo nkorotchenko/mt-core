@@ -6,43 +6,43 @@ abstract class Theme {
 
 	private $headerStrings = array();
 	private $footerStrings = array();
-	
+
 	public $app = false;
 	public $path = false;
 	public $url = false;
 	public $title = false;
-	
+
 	abstract public function Draw ($name, $params);
-	
+
 	public function __set($name, $value) 
-    {
-         $this->data[$name] = $value;
-    }
+	{
+		 $this->data[$name] = $value;
+	}
 
-    public function __get($name) 
-    {
-         if (array_key_exists($name, $this->data)) {
-            return $this->data[$name];
-        }
+	public function __get($name) 
+	{
+		 if (array_key_exists($name, $this->data)) {
+			return $this->data[$name];
+		}
 
-        $trace = debug_backtrace();
-        trigger_error(
-            'Неопределенное свойство в __get(): ' . $name .
-            ' в файле ' . $trace[0]['file'] .
-            ' на строке ' . $trace[0]['line'],
-            E_USER_NOTICE);
-        return null;
-    }
+		$trace = debug_backtrace();
+		trigger_error(
+			'Неопределенное свойство в __get(): ' . $name .
+			' в файле ' . $trace[0]['file'] .
+			' на строке ' . $trace[0]['line'],
+			E_USER_NOTICE);
+		return null;
+	}
 
-    public function __isset($name) 
-    {
-         return isset($this->data[$name]);
-    }
+	public function __isset($name) 
+	{
+		 return isset($this->data[$name]);
+	}
 
-    public function __unset($name) 
-    {
-         unset($this->data[$name]);
-    }
+	public function __unset($name) 
+	{
+		 unset($this->data[$name]);
+	}
 
 	public function HeaderStrings()
 	{
@@ -51,7 +51,7 @@ abstract class Theme {
 			echo $str;
 		}
 	}
-	
+
 	public function FooterStrings()
 	{
 		foreach ($this->headerStrings as $str)
@@ -59,23 +59,23 @@ abstract class Theme {
 			echo $str;
 		}
 	}
-	
+
 	public function AddHeader($str)
 	{
 		$headerStrings[] = $str;
 	}
-	
+
 	public function AddFooter($str)
 	{
 		$footerStrings[] = $str;
 	}
-}
+	}
 
-class Template {
+	class Template {
 	public static function Get($name, $app)
 	{
 		$fileName = PATH_THEME.strtolower("/$name/$name.theme.php");
-	
+
 		if (file_exists($fileName) == false)
 			return false;
 			

@@ -15,7 +15,7 @@ class System {
 	public static $startTime;
 	
 	function __construct()
-	{		
+	{
     }
 	
 	public static function Init()
