@@ -29,10 +29,10 @@ class Args {
 		
 		foreach($args as $key => $val)
 		{
-			if (!empty($val))
+			if (empty($val))
 				unset($args[$key]);
-		}		
-		
+		}
+
 		// Clean up arguments		
 		$args = Validate("routeApi", $args);
 		foreach($args as $key => $val)

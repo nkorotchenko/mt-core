@@ -31,14 +31,20 @@ class DefaultTheme extends Theme {
 
 	public function Draw ($name, $params)
 	{
+		$fileName = null;
+		if (!empty($name))
+			$fileName = $this->app->path."/pages/$name.page.php";
+			
+		if (!file_exists($fileName))
+			System::Redirect("/404");
+			
 		$this->Header();
 		
 		parent::HeaderStrings();
 		
-		$this->Content();
+		$this->Content();		
 		
-		if ($name)
-			include($this->app->path."/pages/$name.page.php");
+		include($fileName);
 		
 		$this->EndContent();
 		

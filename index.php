@@ -5,8 +5,9 @@
 
 error_reporting (E_ALL | E_STRICT);
 
-if (version_compare(phpversion(), "5.3.0", "<") == true)
-	{ die ("PHP 5.3 Only"); }
+if (version_compare(phpversion(), "5.3.0", "<") == true) {
+	die ("PHP 5.3 Only");
+}
 
 define("PATH_SITE",dirname(__FILE__));
 define("PATH_KERNEL",PATH_SITE."/kernel");

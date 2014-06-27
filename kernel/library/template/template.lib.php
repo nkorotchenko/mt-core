@@ -2,7 +2,7 @@
 
 abstract class Theme {
 
-	private $data = array();
+	private $___data = array();
 
 	private $headerStrings = array();
 	private $footerStrings = array();
@@ -16,13 +16,13 @@ abstract class Theme {
 
 	public function __set($name, $value) 
 	{
-		 $this->data[$name] = $value;
+		 $this->___data[$name] = $value;
 	}
 
 	public function __get($name) 
 	{
-		 if (array_key_exists($name, $this->data)) {
-			return $this->data[$name];
+		 if (array_key_exists($name, $this->___data)) {
+			return $this->___data[$name];
 		}
 
 		$trace = debug_backtrace();
@@ -36,12 +36,12 @@ abstract class Theme {
 
 	public function __isset($name) 
 	{
-		 return isset($this->data[$name]);
+		 return isset($this->___data[$name]);
 	}
 
 	public function __unset($name) 
 	{
-		 unset($this->data[$name]);
+		 unset($this->___data[$name]);
 	}
 
 	public function HeaderStrings()

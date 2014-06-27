@@ -6,9 +6,14 @@ class Settings
 	
 	function __construct()
 	{
+		$currentDate = time();
+		$commingDate = date("d-m-Y", System::DateAdd('m',1,$currentDate));
+		
 		$this->container = array(
-            "core"   		=> array("install"=>"0", "style"=>"default", "prefix"=>"fc", "site_name"=>""),
-            "data_base"   	=> array("pconnect"=>"0", "server"=>"localhost", "name"=>"", "user"=>"root", "password"=>"")
+            "core"   		=> array("install"=>"0", "style"=>"default", "prefix"=>"fc",
+				"site_name"=>"", "comming_soon"=>"1", "comming_date"=>$commingDate ),
+            "data_base"   	=> array("pconnect"=>"0", "server"=>"localhost", "name"=>"",
+				"user"=>"root", "password"=>"")
         );
 		
 		asort($this->container);
