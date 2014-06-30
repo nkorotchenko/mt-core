@@ -10,10 +10,16 @@ class Settings
 		$commingDate = date("d-m-Y", System::DateAdd('m',1,$currentDate));
 		
 		$this->container = array(
-            "core"   		=> array("install"=>"0", "style"=>"default", "prefix"=>"fc",
-				"site_name"=>"", "comming_soon"=>"1", "comming_date"=>$commingDate ),
+			////////////////////////////////////////////////////////////////////////////////////////
+			// CORE INFO
+            "core"   		=> array("is_installed"=>"0", "style"=>"default", "prefix"=>"none",
+				"site_name"=>"", "comming_soon"=>"1", "comming_date"=>$commingDate,
+				"admin_login"=>"admin", "admin_password"=>"admin" ),
+			
+			////////////////////////////////////////////////////////////////////////////////////////
+			// DATABASE INFO			
             "data_base"   	=> array("pconnect"=>"0", "server"=>"localhost", "name"=>"",
-				"user"=>"root", "password"=>"")
+				"user"=>"root", "password"=>"", "using"=>"0")
         );
 		
 		asort($this->container);
