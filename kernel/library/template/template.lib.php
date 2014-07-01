@@ -16,32 +16,32 @@ abstract class Theme {
 
 	public function __set($name, $value) 
 	{
-		 $this->___data[$name] = $value;
+		$this->___data[$name] = $value;
 	}
 
 	public function __get($name) 
 	{
-		 if (array_key_exists($name, $this->___data)) {
+		if (array_key_exists($name, $this->___data)) {
 			return $this->___data[$name];
 		}
 
 		$trace = debug_backtrace();
 		trigger_error(
-			'Неопределенное свойство в __get(): ' . $name .
-			' в файле ' . $trace[0]['file'] .
-			' на строке ' . $trace[0]['line'],
+			"Undefined property ". $name ." in __get(): ".
+			" file " . $trace[0]["file"] .
+			" line " . $trace[0]["line"],
 			E_USER_NOTICE);
 		return null;
 	}
 
 	public function __isset($name) 
 	{
-		 return isset($this->___data[$name]);
+		return isset($this->___data[$name]);
 	}
 
 	public function __unset($name) 
 	{
-		 unset($this->___data[$name]);
+		unset($this->___data[$name]);
 	}
 
 	public function HeaderStrings()

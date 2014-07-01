@@ -5,7 +5,7 @@ class CommingApplication extends Application {
 		$settings = System::GetSettings();
 		
 		$commingSoonDate =
-			strtotime($settings->GetParam("core", "comming_date"));
+			strtotime($settings->core["comming_date"]);
 		
 		$theme = Template::Get("default", $this);
 		

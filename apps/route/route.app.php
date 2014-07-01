@@ -22,13 +22,21 @@ class RouteApplication extends Application {
 	{
 		$settings = System::GetSettings();
 		
-		$isCommingSoon = $settings->GetParam("core", "comming_soon");
-		$commingSoonDate = $settings->GetParam("core", "comming_date");
+		$isCommingSoon = $settings->core["comming_soon"];
+		$commingSoonDate = $settings->core["comming_date"];
 		
 		$pageClass = "index";
 		
 		if (count($args) > 0)
-			$pageClass = $args[0];
+			$pageClass = System::GetPageClass($args);
+			
+		if (System::IsPageClass($pageClass, "login") || System::IsPageClass($pageClass, "logout")) {
+			if (System::IsAppExist("sign"))
+			{
+				System::RunApp("sign");
+				return true;
+			}
+		}
 
 		if (!$this->ExclusionPages($pageClass)) {
 			if ($isCommingSoon && !System::IsPageClass($pageClass, "comming")) {
