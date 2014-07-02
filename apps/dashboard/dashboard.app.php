@@ -5,7 +5,7 @@ class DashboardApplication extends Application {
 		$settings = System::GetSettings();
 		$pageClass = System::GetPageClass($args);
 		
-		if (Users::IsAuth()) {		
+		if (Auth::IsAuth()) {		
 			//if (System::IsPageClass($pageClass, "login")) {
 				$theme = Template::Get("default", $this);
 				

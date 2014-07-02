@@ -6,8 +6,8 @@ class SignApplication extends Application {
 		$pageClass = System::GetPageClass($args);
 		
 		if (isset($_POST["login"]) && isset($_POST["password"])) {
-			if (Users::CheckAuth(null, $_POST["login"], $_POST["password"])) {
-				Users::SignIn();
+			if (Auth::Check(null, $_POST["login"], $_POST["password"])) {
+				Auth::SignIn();
 				if (isset($_GET["url"]))
 					System::Redirect($_GET["url"]);
 				//else System::Redirect($_GET["url"]);
@@ -21,7 +21,7 @@ class SignApplication extends Application {
 			$theme->Draw("signin", null);
 		}
 		else if (System::IsPageClass($pageClass, "logout")) {
-			Users::SignOut();
+			Auth::SignOut();
 			System::Redirect("/index");
 		}
 		else {

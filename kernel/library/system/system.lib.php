@@ -28,6 +28,7 @@ class System {
 		self::$settings->Init();
 		
 		Users::Init();
+		Auth::Init();
 	}
 	
 	public static function GetSettings()

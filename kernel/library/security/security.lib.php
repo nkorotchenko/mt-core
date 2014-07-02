@@ -2,6 +2,7 @@
 
 require_once( "validation.php" );
 require_once( "users.php" );
+require_once( "auth.php" );
 
 class Security {
 	public static function GetIp()
