@@ -12,9 +12,9 @@ class Settings
 		$this->___data = array(
 			////////////////////////////////////////////////////////////////////////////////////////
 			// CORE INFO
-            "core"   		=> array("is_installed"=>"0", "style"=>"default", "prefix"=>"none",
+            "core"   		=> array("is_installed"=>"0", "style"=>"default", "prefix"=>"default",
 				"site_name"=>"", "comming_soon"=>"1", "comming_date"=>$commingDate,
-				"admin_login"=>"admin", "admin_password"=>"admin" ),
+				"admin_login"=>"admin", "admin_password"=>"admin", "admin_token"=>"", "admin_salt"=>"" ),
 			
 			////////////////////////////////////////////////////////////////////////////////////////
 			// DATABASE INFO			

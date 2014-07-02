@@ -4,9 +4,6 @@ class ErrorApplication extends Application {
 	{
 		$settings = System::GetSettings();
 		
-		$commingSoonDate =
-			strtotime($settings->GetParam("core", "comming_date"));
-		
 		$theme = Template::Get("default", $this);
 		
 		$errorNumber = "unknown";

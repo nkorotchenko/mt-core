@@ -12,6 +12,7 @@ class System {
 	private static $sql = false;
 	private static $sqlConnection = false;
 	private static $args = false;
+	
 	public static $startTime;
 	
 	function __construct()
@@ -25,6 +26,8 @@ class System {
 		self::$startTime = microtime(true);
 		self::$settings = new SETTINGS();
 		self::$settings->Init();
+		
+		Users::Init();
 	}
 	
 	public static function GetSettings()
@@ -150,7 +153,8 @@ class System {
 			return false;
 		
 		return $app;
-	}
+	}	
+	
 }
 
 ?>

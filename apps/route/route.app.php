@@ -4,8 +4,7 @@ class RouteApplication extends Application {
 	public function ExclusionPages($pageClass)
 	{
 		$exclusionList = array(
-			"admin",
-			"control",
+			"dashboard",
 			"login",
 			"logout"
 		);
