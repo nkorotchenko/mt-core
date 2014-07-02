@@ -1,4 +1,5 @@
 <?php
+////////////////////////////////////////////////////////////////////////
 
 abstract class Theme {
 
@@ -69,9 +70,11 @@ abstract class Theme {
 	{
 		$footerStrings[] = $str;
 	}
-	}
+}
 
-	class Template {
+////////////////////////////////////////////////////////////////////////
+
+class Template {
 	public static function Get($name, $app)
 	{
 		$fileName = PATH_THEME.strtolower("/$name/$name.theme.php");

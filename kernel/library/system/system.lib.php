@@ -17,7 +17,7 @@ class System {
 	
 	function __construct()
 	{
-    }
+	}
 	
 	public static function Init()
 	{
@@ -88,12 +88,12 @@ class System {
 		return $timestamp;
 	}
 	
-	public static function GetPageClass($args)
+	public static function GetPageClass($args, $argNumber = 0)
 	{
 		$pageClass = "index";
 		
-		if (count($args) > 0)
-			$pageClass = $args[0];
+		if (count($args) > $argNumber)
+			$pageClass = $args[$argNumber];
 			
 		return $pageClass;
 	}
@@ -105,16 +105,15 @@ class System {
 	
 	public static function IsAppExist($name)
 	{
-		$fileName = PATH_APP.strtolower("/$name/$name.app.php");
+		$fileName = PATH_APP."/$name/$name.app.php";
 	
-		if (file_exists($fileName) == false)
+		if (file_exists($fileName) == false) {
 			return false;
+		}
 			
 		require_once($fileName);
 		
-		$className = $name."Application";
-		
-		$app = false;
+		$className = self::GenerateClassName($fileName);
 		
 		if(class_exists($className))
 		{
@@ -126,18 +125,9 @@ class System {
 	
 	public static function RunApp($name, $args = null, $params = null)
 	{
-		$fileName = PATH_APP.strtolower("/$name/$name.app.php");
-	
-		if (file_exists($fileName) == false)
-			return false;
-			
-		require_once($fileName);
+		$app = self::GetApp(PATH_APP."/$name/$name.app.php");
 		
-		$className = $name."Application";
-		
-		$app = false;
-		
-		if(class_exists($className))
+		if ($app)
 		{
 			if (empty($args))
 				$args = Args::GetArgs();
@@ -145,16 +135,50 @@ class System {
 			if (empty($params))
 				$params = Args::GetParams();
 				
-			$app = new $className();
-			$app->path = PATH_APP.strtolower("/$name");
-			$app->url = str_replace(PATH_SITE, "", PATH_APP.strtolower("/$name"));
 			$app->main($args, $params);
+		}
+		
+		return $app;
+	}
+	
+	public static function GenerateClassName($fileName)
+	{
+		$baseFileName = ucfirst(strtolower(basename($fileName)));
+		
+		$extPos = strpos($baseFileName, ".");
+		
+		if ($extPos > 0)
+			$baseFileName = substr($baseFileName, 0, $extPos);
+		
+		return $baseFileName."Application";
+	}
+	
+	public static function GetApp($fileName, $className = null)
+	{
+		if (file_exists($fileName) == false) {			
+			return false;
+		}
+		
+		$baseClassName = self::GenerateClassName($fileName);
+			
+		if (!empty($className)) {		
+			$baseClassName = $className;
+		}
+		
+		$app = false;
+		
+		require_once($fileName);
+		
+		if(class_exists($baseClassName)) {
+			$app = new $baseClassName();
+			$app->path = dirname($fileName);
+			$app->url = str_replace(dirname($app->path), "", $app->path);
 		}
 		else
 			return false;
-		
+			
 		return $app;
-	}	
+	}
 	
 }
 

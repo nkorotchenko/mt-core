@@ -24,10 +24,7 @@ class RouteApplication extends Application {
 		$isCommingSoon = $settings->core["comming_soon"];
 		$commingSoonDate = $settings->core["comming_date"];
 		
-		$pageClass = "index";
-		
-		if (count($args) > 0)
-			$pageClass = System::GetPageClass($args);
+		$pageClass = System::GetPageClass($args);
 			
 		if (System::IsPageClass($pageClass, "login") || System::IsPageClass($pageClass, "logout")) {
 			if (System::IsAppExist("sign"))
