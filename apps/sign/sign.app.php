@@ -7,7 +7,6 @@ class SignApplication extends Application {
 		
 		if (isset($_POST["login"]) && isset($_POST["password"])) {
 			if (Users::CheckAuth(null, $_POST["login"], $_POST["password"])) {
-				error_log("Click....");
 				Users::SignIn();
 				if (isset($_GET["url"]))
 					System::Redirect($_GET["url"]);
