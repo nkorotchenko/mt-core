@@ -1,11 +1,15 @@
 <?php
 
+require_once( "errors.php" );
 require_once( "app.php" );
 require_once( "args.php" );
 require_once( "route.php" );
 require_once( "ini.php" );
 require_once( "settings.php" );
 require_once( "sql.php" );
+require_once( "lang.php" );
+
+////////////////////////////////////////////////////////////////////////
 
 class System {
 	private static $settings = false;
@@ -14,13 +18,14 @@ class System {
 	private static $args = false;
 	
 	public static $startTime;
-	
+
 	function __construct()
 	{
 	}
 	
 	public static function Init()
 	{
+	
 		Args::Parse();
 		
 		self::$startTime = microtime(true);
@@ -29,6 +34,8 @@ class System {
 		
 		Users::Init();
 		Auth::Init();
+		
+		Language::Init();
 	}
 	
 	public static function GetSettings()
@@ -50,9 +57,16 @@ class System {
 		return self::$sql;
 	}
 	
+	public static function GetUrl($url)
+	{
+		// TODO:	language in url (example: simple.com/ru/)
+		//			use only to site walking
+		return $url;
+	}
+	
 	public static function Redirect($url)
 	{
-		header('Location: '.$url);
+		header('Location: '.self::GetUrl($url));
 		exit();
 	}
 	
@@ -91,6 +105,8 @@ class System {
 	public static function GetPageClass($args, $argNumber = 0)
 	{
 		$pageClass = "index";
+		
+		// !!!TODO:	dont forget about language in url (example: simple.com/ru/)
 		
 		if (count($args) > $argNumber)
 			$pageClass = $args[$argNumber];

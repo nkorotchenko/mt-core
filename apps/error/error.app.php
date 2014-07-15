@@ -4,7 +4,8 @@ class ErrorApplication extends Application {
 	{
 		$settings = System::GetSettings();
 		
-		$theme = Template::Get("default", $this);
+		$theme = Themes::Get("default", $this);
+		$template = $theme->GetTemplate("default");
 		
 		$errorNumber = "unknown";
 		$errorText = "Just error";

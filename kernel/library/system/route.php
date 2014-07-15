@@ -10,9 +10,7 @@ class Route {
 		
 		/*$this->args = ARGS();
 		$argsList = $this->args->GetArgs();
-		$paramsList = $this->args->GetParams();
-				
-		$argsList = Validate("routeApi", $argsList);*/
+		$paramsList = $this->args->GetParams();*/
 	}
 	
 	public function RunApp($path)

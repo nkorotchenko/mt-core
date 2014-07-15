@@ -9,8 +9,8 @@ class Auth {
 	
 	public static function IsAuth()
 	{
-		$settings = System::GetSettings();		
-		$prefix = $settings->core["prefix"];		
+		$settings = System::GetSettings();
+		$prefix = $settings->core["prefix"];
 		
 		$cookieId = (isset($_COOKIE[ $prefix."_key"])) ? $_COOKIE[ $prefix."_key"] : null;
 		$cookieToken = (isset($_COOKIE[ $prefix."_token"])) ? $_COOKIE[ $prefix."_token"] : null;		
@@ -31,7 +31,7 @@ class Auth {
 		return true;
 	}
 	
-	public static function SignIn($id = null, $isGuest = null)
+	public static function SignIn($id = null, $isGuest = null, $remember = true)
 	{
 		$settings = System::GetSettings();
 		$prefix = $settings->core["prefix"];
@@ -42,15 +42,20 @@ class Auth {
 		$userToken = md5( crypt($userIp.$userSalt) );
 		
 		if ($settings->data_base["using"] != 0) {
-			trigger_error("TODO this block in ".get_class($this), E_USER_NOTICE);
+			_error("TODO this block");
 		}
 		else {
 			$settings->core["admin_token"] = $userToken;
 			$settings->core["admin_salt"] = $userSalt;
 			$settings->Save();
 			
-			setcookie( $prefix."_key", $userId, time() + 3600*24*3, "/" );
-			setcookie( $prefix."_token", $userToken, time() + 3600*24*3, "/" ); 
+			$expire = time() + 3600*24*3;
+			
+			if (!$remember)
+				$expire = 0;
+			
+			setcookie( $prefix."_key", $userId, $expire, "/" );
+			setcookie( $prefix."_token", $userToken, $expire, "/" ); 
 		}
 	}
 	
@@ -69,7 +74,7 @@ class Auth {
 		$settings = System::GetSettings();
 		
 		if ($settings->data_base["using"] != 0) {
-			trigger_error("TODO this block in ".get_class($this), E_USER_NOTICE);
+			_error("TODO this block");
 		}
 		else {
 			if ($settings->core["admin_login"] === $userLogin

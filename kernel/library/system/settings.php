@@ -12,17 +12,20 @@ class Settings
 		$this->___data = array(
 			////////////////////////////////////////////////////////////////////////////////////////
 			// CORE INFO
-            "core"   		=> array("is_installed"=>"0", "style"=>"default", "prefix"=>"default",
+            "core"			=> array("is_installed"=>"0", "theme"=>"default", "prefix"=>"default",
 				"site_name"=>"", "comming_soon"=>"1", "comming_date"=>$commingDate,
-				"admin_login"=>"admin", "admin_password"=>"admin", "admin_token"=>"", "admin_salt"=>"" ),
+				"admin_login"=>"admin", "admin_password"=>"admin", "admin_token"=>"",
+				"admin_salt"=>"" ),
+				
+			"lang"			=> array("multi"=>"0", "default"=>"ru", "gen_url"=>0),
 			
 			////////////////////////////////////////////////////////////////////////////////////////
 			// DATABASE INFO			
-            "data_base"   	=> array("pconnect"=>"0", "server"=>"localhost", "name"=>"",
+            "data_base"		=> array("pconnect"=>"0", "server"=>"localhost", "name"=>"",
 				"user"=>"root", "password"=>"", "using"=>"0")
         );
 		
-		asort($this->___data);
+		//asort($this->___data);
     }
 	
 	function __destruct()
@@ -41,11 +44,7 @@ class Settings
 		else
 		{
 			$trace = debug_backtrace();
-			trigger_error(
-				"You can't add new data in __set(): ".
-				" file " . $trace[0]["file"] .
-				" line " . $trace[0]["line"],
-				E_USER_NOTICE);
+			_error("You can't add new data");
 		}
 	}
 
@@ -56,11 +55,7 @@ class Settings
 		}
 
 		$trace = debug_backtrace();
-		trigger_error(
-			"Undefined property ". $name ." in __get(): ".
-			" file " . $trace[0]["file"] .
-			" line " . $trace[0]["line"],
-			E_USER_NOTICE);
+		_error("Undefined property '". $name ."'");
 		return null;
 	}
 

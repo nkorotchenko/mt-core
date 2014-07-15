@@ -7,14 +7,15 @@ class DashboardApplication extends Application {
 		
 		if (Auth::IsAuth()) {		
 			if (System::IsPageClass($pageClass, "index")) {
-				$theme = Template::Get("default", $this);
+				$theme = Themes::Get("default", $this);
+				$template = $theme->GetTemplate("default");
 				
 				$theme->title = "Dashboard";
-				$theme->Draw("index", null);
+				$theme->Draw("index", $template);
 			}
 			else {
 				$trace = debug_backtrace();
-				trigger_error("Undefinded page class '".$pageClass."' in ".get_class($this), E_USER_NOTICE);
+				_error("Undefinded page class '".$pageClass."'");
 			}
 		}
 		else {			

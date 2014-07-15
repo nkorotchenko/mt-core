@@ -4,6 +4,7 @@ class RouteApplication extends Application {
 	public function ExclusionPages($pageClass)
 	{
 		$exclusionList = array(
+			"comming",
 			"dashboard",
 			"login",
 			"logout"
@@ -19,6 +20,14 @@ class RouteApplication extends Application {
 
 	public function main ($args, $params)
 	{
+		/*$theme = Themes::Get("default", $this);
+		$template = $theme->GetTemplate("default");
+		
+		$theme->title = "Hello world";
+		$theme->Draw("index", $template);*/
+		
+		///////////////////////////////////////////////////////////
+		
 		$settings = System::GetSettings();
 		
 		$isCommingSoon = $settings->core["comming_soon"];
@@ -26,10 +35,16 @@ class RouteApplication extends Application {
 		
 		$pageClass = System::GetPageClass($args);
 			
-		if (System::IsPageClass($pageClass, "login") || System::IsPageClass($pageClass, "logout")) {
-			if (System::IsAppExist("sign"))
+		if ($this->ExclusionPages($pageClass)) {
+			if (System::IsPageClass($pageClass, "dashboard")) {
+				if (System::IsAppExist("dashboard")) {
+					System::RunApp("dashboard");
+					return true;
+				}
+			}
+			else if (System::IsAppExist("system"))
 			{
-				System::RunApp("sign");
+				System::RunApp("system");
 				return true;
 			}
 		}

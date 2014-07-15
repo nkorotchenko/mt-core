@@ -6,7 +6,7 @@
 	<input name="password" type="password" class="form-control" placeholder="Password">
 	<div class="checkbox">
 		<label>
-			<input type="checkbox" value="remember-me"> Remember me
+			<input type="checkbox" name="remember" type="remember" value="1"> Remember me
 		</label>
 	</div>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

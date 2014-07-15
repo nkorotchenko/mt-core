@@ -34,10 +34,9 @@ class Args {
 		}
 
 		// Clean up arguments		
-		$args = Validate("routeApi", $args);
 		foreach($args as $key => $val)
 		{
-			if (!empty($val))
+			if (!empty($val) && Valid::IsName($val))
 				self::$requestArgs[] = $val;
 		}
 		
